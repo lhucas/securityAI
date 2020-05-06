@@ -29,9 +29,9 @@ tf.app.flags.DEFINE_float('trunc_norm_init_std', 1e-4, 'std of trunc norm init, 
 tf.app.flags.DEFINE_float('adagrad_init_acc', 0.1, 'initial accumulator value for Adagrad')
 tf.app.flags.DEFINE_string('mode', 'train', 'must be one of train/eval/decode')
 
-tf.app.flags.DEFINE_boolean('use_embedding', 'True', 'must be one of train/eval/decode')
-tf.app.flags.DEFINE_string('vec_path', './data/result', 'must be one of train/eval/decode')
-tf.app.flags.DEFINE_string('model_path', 'ModelPath', 'must be one of train/eval/decode')
+tf.app.flags.DEFINE_boolean('use_embedding', 'True', 'use pre_trained embeddings or not')
+tf.app.flags.DEFINE_string('vec_path', './data/result', 'embedding path')
+tf.app.flags.DEFINE_string('model_path', 'ModelPath', 'model saved path ')
 
 
 def save_session(sess,model_name,saver):
