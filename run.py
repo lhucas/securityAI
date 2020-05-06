@@ -512,10 +512,10 @@ def run_test(network,vocab,config,saver,data, sentences,candidates):
                     if flag_find !=True:
                          if len(re.findall('[a-zA-Z]+',s[b])):
                              #s[b]=s[b][0]+":"+s[b][1:len(s[b])]
-                             s[b] = "次奥" 
+                             s[b] = "" 
                          else:
                              #s[b] = getStrAllAplha(s[b])  
-                             #s[b] = "辣鸡"
+                             #s[b] = ""
                              s[b] = ""
                     """
             fw_ad.write("        "+sentence + "\n")
@@ -659,6 +659,6 @@ if __name__ == "__main__":
     saver = tf.train.Saver(max_to_keep=3)
     #run_test_references_new(text)
     result = run_test(network,vocab,config,saver,context, data_org, candidates)
-    run_test_references(result)
+    #run_test_references(result)
     #run_test_reference_m(context,data_org)
     #result = run_test_reference(context, data_org)
