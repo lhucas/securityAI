@@ -38,7 +38,7 @@ tf.app.flags.DEFINE_string('mode', 'train', 'must be one of train/eval/decode')
 tf.app.flags.DEFINE_boolean('use_embedding', 'True', 'use pre_trained embedding')
 tf.app.flags.DEFINE_string('vec_path', 'data/result', 'pre_trained word embedding path')
 tf.app.flags.DEFINE_string('model_path', 'ModelPath', 'model saved path')
-pp.flags.DEFINE_string('vec_dim', '300', 'word embedding dims')
+tf.app.flags.DEFINE_string('vec_dim', '300', 'word embedding dims')
 
 
 
