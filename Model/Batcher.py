@@ -5,13 +5,15 @@ import time
 import numpy as np
 import tensorflow as tf
 import Model.Vocab
+import jieba
+
 
 class Example(object):
   def __init__(self, article, types, vocab, max_enc_steps):
     article_words = article.split(" ")
     if len(article_words) > max_enc_steps:
       article_words = article_words[:max_enc_steps]
-    self.enc_len = len(article_words) 
+    self.enc_len = len(article_words)
     self.enc_input = [vocab.word2id(w) for w in article_words] 
     self.type = types
 
@@ -64,6 +66,10 @@ class Batcher(object):
       for c in content:
         con_arr = c.split("\t")
         types = int(con_arr[0])
+        #if len(con_arr)<2:
+        #    text = " "
+        #else:
+        #    text = " ".join(jieba.cut(con_arr[1]))
         text = con_arr[1]
         example = Example(text, types, self._vocab,self._max_seq_len)
         examples.append(example)
@@ -81,26 +87,20 @@ class Batcher(object):
 
 
 class BatcherTest(object):
-  def __init__(self, data_path, vocab,  max_seq_len, flag):
-    self._data_path = data_path
+  def __init__(self, data, vocab,  max_seq_len):
     self._vocab = vocab
     self._max_seq_len = max_seq_len
-    self._input_gen = self._vocab.example_generator_test(self._data_path, flag)
-    self._flag = flag
-
+    #self._input_gen = self._vocab.example_generator_predict(data,1)
+    self._data = data
   def next_batch(self):
-    print ("next_batch!!!!")
     try:
-      content = next(self._input_gen)
+      #content = next(self._input_gen)
       examples = []
-      for c in content:
-        print (c)
-        #con_arr = c.split("     ")
-        #types = int(con_arr[0])
-        #text = con_arr[1]
-        example = Example(c, 1, self._vocab,self._max_seq_len)
-        examples.append(example)
-      batch = Batch(examples, len(content), self._vocab)
+      #for c in content:
+      #  print (c)
+      example = Example(self._data, 1, self._vocab,self._max_seq_len)
+      examples.append(example)
+      batch = Batch(examples, 1, self._vocab)
       return  batch
     except StopIteration:
       tf.logging.info("The example generator for this example queue filling thread has exhausted data.")
@@ -118,18 +118,29 @@ class BatcherTestRun(object):
     self._flag = flag
 
   def next_batch(self):
-    print ("next_batch!!!!")
     try:
       content = next(self._input_gen)
       examples = []
       for c in content:
-        print (c)
+        #print (c)
         example = Example(c, 1, self._vocab,self._max_seq_len)
         examples.append(example)
       batch = Batch(examples, len(content), self._vocab)
       return  batch
     except StopIteration:
       tf.logging.info("The example generator for this example queue filling thread has exhausted data.")
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

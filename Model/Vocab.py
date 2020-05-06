@@ -11,12 +11,12 @@ UNKNOWN_TOKEN = '[UNK]'
  
 
 class Vocab(object):
-  def __init__(self, vocab_file,vec_file, max_size):
+  def __init__(self, vocab_file,vec_file, max_size,vec_dim):
     self._word_to_id = {}
     self._id_to_word = {}
     self._count = 0 
     self._embeddings = {}
-    self._word_embedding = np.random.rand(50000,300)
+    self._word_embedding = np.random.rand(max_size,vec_dim)
 
     for w in [UNKNOWN_TOKEN, PAD_TOKEN]:
       self._word_to_id[w] = self._count
@@ -82,6 +82,19 @@ class Vocab(object):
         print("example_generator completed reading all datafiles. No more data.")
         break
 
+
+  def example_generator_predict(self,data,  batch_size):
+      result = []
+      #for line in data:
+      #  result.append(line.strip())
+      #  if len(result)==batch_size:
+      #    yield result
+      #    result = []
+      return data
+
+
+
+
   def example_generator_test(self, data_path, flag):
     print("examplr_generator")
     with open(data_path,"r",encoding="utf-8") as fr:
@@ -95,11 +108,11 @@ class Vocab(object):
         r_r = []
         for c in context_l:
           #print (c)
-          r_l.append(c.strip())
+          r_l.append(c)
         for c in context_r:
-          r_r.append(c.strip())
+          r_r.append(c)
         for c in context_:
-          r_m.append(c.strip())
+          r_m.append(c)
         if flag == "left":
           yield r_l
         elif flag == "right":
@@ -121,7 +134,7 @@ class Vocab(object):
         print("parameter is not right")
       r = []
       for c in context:
-        r.append(c.strip())
+        r.append(c)
       yield r
 
 
