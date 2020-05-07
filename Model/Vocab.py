@@ -51,9 +51,6 @@ class Vocab(object):
       word = self._id_to_word[i]
       if word in self._embeddings.keys():
         self._word_embedding[i] = self._embeddings[word]
-  
-
-
 
   def word2id(self, word):
     if word not in self._word_to_id:
@@ -64,8 +61,7 @@ class Vocab(object):
     if word_id not in self._id_to_word:
       raise ValueError('Id not found in vocab: %d' % word_id)
     return self._id_to_word[word_id]
-	
-	
+		
   def decode(self, cur_ids):
         return ' '.join([self.id2word(cur_id) for cur_id in cur_ids])
 	
