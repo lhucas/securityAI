@@ -92,9 +92,6 @@ class Vocab(object):
       #    result = []
       return data
 
-
-
-
   def example_generator_test(self, data_path, flag):
     print("examplr_generator")
     with open(data_path,"r",encoding="utf-8") as fr:
