@@ -48,7 +48,7 @@ def load_ckpt(saver, sess):
     try:
       #latest_filename = "checkpoint_best" if ckpt_dir=="eval" else None
       #ckpt_dir = os.path.join(FLAGS.log_root, ckpt_dir)
-      ckpt_state = tf.train.get_checkpoint_state("./ModelPath")
+      ckpt_state = tf.train.get_checkpoint_state(FLAGS.model_path)
       tf.logging.info('Loading checkpoint %s', ckpt_state.model_checkpoint_path)
       saver.restore(sess, ckpt_state.model_checkpoint_path)
       return ckpt_state.model_checkpoint_path
